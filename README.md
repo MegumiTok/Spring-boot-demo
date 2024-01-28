@@ -37,11 +37,11 @@ docker-compose exec postgres psql -h localhost -U postgres
 - [02 API layer & Dependency Injection](./blog/02_API_layer.md)
 - [03 Connecting to DB & Creating tables](./blog/03_Connecting_to_DB.md)
 - [04 JPA Repository](./blog/04_JPA_Repository.md)
-- [05 Rest docs](./blog/05_Rest_docs.md)
+- [06 Test cods](./blog/06_test_JUnit5.md)
 
 ## メモ
 
-間違えて push しちゃった時、ローカルでの変更等は残して、git pushだけ取り消したいという場合は以下のコマンド：
+間違えて push してしまった時、ローカルでの変更等は残して、git pushだけ取り消したいという場合は以下のコマンド：
 
 [参考](https://qiita.com/S42100254h/items/db435c98c2fc9d4a68c2)
 

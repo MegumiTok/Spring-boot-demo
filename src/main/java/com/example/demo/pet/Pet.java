@@ -11,9 +11,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table
-@Getter
-@Setter
-@ToString
+@Data // ゲッター、セッター、equals(), hashCode(), toString() メソッドを自動的に生成
 @NoArgsConstructor(force = true, access = AccessLevel.PROTECTED)
 public class Pet implements Serializable {
 
