@@ -21,6 +21,9 @@
 		<checkstyle.version>10.12.7</checkstyle.version>
 		<jmolecules.version>2023.1.1</jmolecules.version>
 		<jmolecules-bytebuddy.version>0.18.0</jmolecules-bytebuddy.version>
+		<asciidoctor-maven-plugin.version>2.2.5</asciidoctor-maven-plugin.version>
+		<asciidoctorj-diagram.version>2.2.14</asciidoctorj-diagram.version>
+		<spring-asciidoctor-backends.version>0.0.7</spring-asciidoctor-backends.version>
 
 		<!-- For test plugins -->
 		<maven.test.skip>false</maven.test.skip>
@@ -57,6 +60,11 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -111,6 +119,35 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>1.5.8</version>
+				<executions>
+					<execution>
+						<id>generate-docs</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>html</backend>
+							<doctype>book</doctype>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework.restdocs</groupId>
+						<artifactId>spring-restdocs-asciidoctor</artifactId>
+						<version>${spring-restdocs.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
