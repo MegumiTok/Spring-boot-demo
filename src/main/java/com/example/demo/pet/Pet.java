@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@NoArgsConstructor(force = true, access = AccessLevel.PROTECTED)
 public class Pet implements Serializable {
 
 	@Id
@@ -27,9 +27,14 @@ public class Pet implements Serializable {
 
 	private Integer age;
 
-	@Builder
 	public Pet(Long id, String name, LocalDate dob, Integer age) {
 		this.id = id;
+		this.name = name;
+		this.dob = dob;
+		this.age = age;
+	}
+
+	public Pet(String name, LocalDate dob, Integer age) {
 		this.name = name;
 		this.dob = dob;
 		this.age = age;
