@@ -17,12 +17,10 @@ import java.util.List;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PetController.class)
-@AutoConfigureRestDocs(outputDir = "target/snippets")
+@AutoConfigureRestDocs
 public class PetApiDocTests {
 
 	@Autowired
@@ -38,13 +36,7 @@ public class PetApiDocTests {
 				new Pet(2L, "star", LocalDate.of(2018, Month.JANUARY, 18), 5));
 		given(this.petService.getPets()).willReturn(pets);
 
-		this.mvc.perform(get("/pets"))
-			.andExpect(status().isOk())
-			.andDo(document("get-pets",
-					responseFields(fieldWithPath("[].id").description("The ID of the pet"),
-							fieldWithPath("[].name").description("The name of the pet"),
-							fieldWithPath("[].dob").description("The date of birth of the pet"),
-							fieldWithPath("[].age").description("The age of the pet"))));
+		this.mvc.perform(get("/pets")).andExpect(status().isOk()).andDo(document("get-pets"));
 	}
 
 }

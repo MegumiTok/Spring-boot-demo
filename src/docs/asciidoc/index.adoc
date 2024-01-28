@@ -3,15 +3,8 @@
 // :toclevels: 3
 = Demo Document
 
-:snippets: ../../../target/snippets
-
 == Pets
 
-=== Curl request
-include::{snippets}/get-pets/curl-request.adoc[]
-
-=== HTTP response
-include::{snippets}/get-pets/http-response.adoc[]
-
-
+=== Get all pets
+operation::get-pets[snippets='curl-request,http-response']
 

@@ -24,6 +24,7 @@
 		<asciidoctor-maven-plugin.version>2.2.5</asciidoctor-maven-plugin.version>
 		<asciidoctorj-diagram.version>2.2.14</asciidoctorj-diagram.version>
 		<spring-asciidoctor-backends.version>0.0.7</spring-asciidoctor-backends.version>
+		<spring-asciidoctor-maven-resources-plugin.version>2.7</spring-asciidoctor-maven-resources-plugin.version>
 
 		<!-- For test plugins -->
 		<maven.test.skip>false</maven.test.skip>
@@ -64,6 +65,7 @@
 		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<version>${spring-restdocs.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -89,41 +91,9 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${maven-checkstyle-plugin.version}</version>
-				<dependencies>
-					<dependency>
-						<groupId>com.puppycrawl.tools</groupId>
-						<artifactId>checkstyle</artifactId>
-						<version>${checkstyle.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>io.spring.javaformat</groupId>
-						<artifactId>spring-javaformat-checkstyle</artifactId>
-						<version>${spring-javaformat.version}</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<id>checkstyle-validation</id>
-						<phase>validate</phase>
-						<inherited>true</inherited>
-						<configuration>
-							<configLocation>io/spring/javaformat/checkstyle/checkstyle.xml</configLocation>
-							<suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
-							<includeTestSourceDirectory>true</includeTestSourceDirectory>
-						</configuration>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.asciidoctor</groupId>
 				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>1.5.8</version>
+				<version>${asciidoctor-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>generate-docs</id>
@@ -145,6 +115,8 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

@@ -39,4 +39,12 @@ docker-compose exec postgres psql -h localhost -U postgres
 - [04 JPA Repository](./blog/04_JPA_Repository.md)
 - [05 Rest docs](./blog/05_Rest_docs.md)
 
+## メモ
 
+間違えて push しちゃった時、ローカルでの変更等は残して、git pushだけ取り消したいという場合は以下のコマンド：
+
+[参考](https://qiita.com/S42100254h/items/db435c98c2fc9d4a68c2)
+
+```shell
+git reset --soft HEAD^
+```
