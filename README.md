@@ -1,17 +1,13 @@
 # Getting Started
 
-## Developing
+## Requirements
 - JDK 17
 
-```
-% java --version
-openjdk 17.0.7 2023-04-18 LTS
-OpenJDK Runtime Environment (build 17.0.7+7-LTS)
-OpenJDK 64-Bit Server VM (build 17.0.7+7-LTS, mixed mode, sharing)
-
+```shell
+asdf install
 ```
 
-## Build
+## Build Project
 
 ```shell
 ./mvnw clean package
@@ -24,12 +20,21 @@ OpenJDK 64-Bit Server VM (build 17.0.7+7-LTS, mixed mode, sharing)
 ```
 
 ## Format and validate code
+
 ```shell
 ./mvnw spring-javaformat:apply validate
 ```
+
+## Connect to DB
+
+```shell
+docker-compose exec postgres psql -h localhost -U postgres
+```
+
 ## Blog
 
 - [01 Intro](./blog/01_Intro.md)
-- [02 API layer ](./blog/02_API_layer.md)
+- [02 API layer & Dependency Injection](./blog/02_API_layer.md)
+- [03 Connecting to DB & Creating tables](./blog/03_Connecting_to_DB.md)
 
-# Spring-boot-demo
+

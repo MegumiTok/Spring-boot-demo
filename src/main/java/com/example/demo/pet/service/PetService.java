@@ -10,8 +10,9 @@ import java.util.List;
 @Service
 public class PetService {
 
-    public List<Pet> getPets() {
-        var pet = Pet.builder().id(1L).name("showdy").dob(LocalDate.of(2000, Month.APRIL, 25)).age(20).build();
-        return List.of(pet);
-    }
+	public List<Pet> getPets() {
+		var pet = Pet.builder().id(1L).name("showdy").dob(LocalDate.of(2000, Month.APRIL, 25)).age(20).build();
+		return List.of(pet);
+	}
+
 }

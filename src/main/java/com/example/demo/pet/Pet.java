@@ -1,15 +1,24 @@
 package com.example.demo.pet;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
+@Entity
+@Table
 @Getter
 @Setter
-public class Pet {
+@ToString
+@NoArgsConstructor
+public class Pet implements Serializable {
 
+	@Id
+	@GeneratedValue
 	private Long id;
 
 	private String name;
@@ -24,12 +33,6 @@ public class Pet {
 		this.name = name;
 		this.dob = dob;
 		this.age = age;
-	}
-
-	@Override
-	public String toString() {
-		return "Pet{" + "id=" + this.id + ", name='" + this.name + '\'' + ", dob=" + this.dob + ", age=" + this.age
-				+ '}';
 	}
 
 }
