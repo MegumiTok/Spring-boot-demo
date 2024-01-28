@@ -1,4 +1,4 @@
-# Connecting to Database
+# Connecting to DB & Creating tables
 
 - Spring Bootは、データベースアクセスにSpring Dataを使用
 
@@ -98,5 +98,77 @@ postgres=# \c pet
 You are now connected to database "pet" as user "postgres".
 pet=# \d
 Did not find any relations.
+```
+
+## JPA and @Entity
+
+[公式docs](https://spring.pleiades.io/spring-boot/docs/current/reference/html/data.html#data.sql.jpa-and-spring-data)
+
+[動画解説](https://youtu.be/9SGDpanrc8U?si=ntyOamLD71swUt3s&t=2546)
+
+一般的なエンティティクラスは、次の例のようになります。
+
+```java
+@Entity //<--- for JPA
+public class City implements Serializable { //<-- Serializable
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String state;
+
+    // ... additional members, often include @OneToMany mappings
+
+  // @NoArgsConstructor をクラスにつけたらこの引数のないコンストラクタは省略できる
+    protected City() {
+        // no-args constructor required by JPA spec
+        // this one is protected since it should not be used directly
+    }
+
+    public City(String name, String state) {
+        this.name = name;
+        this.state = state;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getState() {
+        return this.state;
+    }
+
+    // ... etc
+
+}
+```
+
+> public Pet() {} コンストラクタが必要になる理由は、JPA（Java Persistence API）がエンティティの永続性（データベースに保存すること）を管理する際、デフォルトコンストラクタを必要とするから
+
+```shell
+    create sequence pet_seq start with 1 increment by 50
+Hibernate: 
+    create sequence pet_seq start with 1 increment by 50
+2024-01-29T01:59:32.734+09:00 DEBUG 98045 --- [           main] org.hibernate.SQL                        : 
+    create table pet (
+        age integer,
+        dob date,
+        id bigint not null,
+        name varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    create table pet (
+        age integer,
+        dob date,
+        id bigint not null,
+        name varchar(255),
+        primary key (id)
+    )
 ```
 
