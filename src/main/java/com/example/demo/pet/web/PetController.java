@@ -18,7 +18,7 @@ public class PetController {
 
 	@GetMapping
 	public List<Pet> getPets() {
-		return petService.getPets();
+		return this.petService.getPets();
 	}
 
 }
