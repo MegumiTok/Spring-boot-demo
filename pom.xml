@@ -19,6 +19,8 @@
 		<spring-javaformat.version>0.0.41</spring-javaformat.version>
 		<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
 		<checkstyle.version>10.12.7</checkstyle.version>
+		<jmolecules.version>2023.1.1</jmolecules.version>
+		<jmolecules-bytebuddy.version>0.18.0</jmolecules-bytebuddy.version>
 
 		<!-- For test plugins -->
 		<maven.test.skip>false</maven.test.skip>
@@ -50,6 +52,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
