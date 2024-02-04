@@ -9,10 +9,16 @@ import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * Restdocs を生成するまでについて学習
+ */
+
 @Entity
 @Table
-@Data // ゲッター、セッター、equals(), hashCode(), toString() メソッドを自動的に生成
-@NoArgsConstructor(force = true, access = AccessLevel.PROTECTED)
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 public class Pet implements Serializable {
 
 	@Id

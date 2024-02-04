@@ -46,3 +46,23 @@ public class PetService {
 ## O/Rマッピング（Object/RDB mapping）
 
 - データ形式の相互変換を行う
+
+##
+
+```java
+@RestController
+@RequestMapping("/pets")
+@RequiredArgsConstructor
+public class PetController {
+
+    private final Pets pets;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getPetById(@PathVariable Long id) {
+        var pet = this.pets.getById(id); <--- 代わりに JpaRepository.getReferenceById(ID) を使用してください とのこと
+        return ResponseEntity.ok(pet); 
+    }
+}
+```
+
+[非推奨の API](https://spring.pleiades.io/spring-data/jpa/docs/current/api/deprecated-list.html)

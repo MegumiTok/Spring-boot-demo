@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * Jackson について学習
+ */
 @Component
 @ToString
 @NoArgsConstructor

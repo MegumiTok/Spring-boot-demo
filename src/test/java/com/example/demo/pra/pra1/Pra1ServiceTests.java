@@ -9,6 +9,10 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Tests for {@link Pra1Service}.
+ */
+
 @SpringBootTest
 class Pra1ServiceTests {
 
@@ -42,7 +46,6 @@ class Pra1ServiceTests {
 
     /*
      * フィールドの可視性が public な場合は、 Getter/Setter は無くても変換できることの確認
-     *
      */
     @Test
     void testConvertObjectToJson2() throws IOException {
