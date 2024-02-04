@@ -21,6 +21,10 @@
 		<checkstyle.version>10.12.7</checkstyle.version>
 		<jmolecules.version>2023.1.1</jmolecules.version>
 		<jmolecules-bytebuddy.version>0.18.0</jmolecules-bytebuddy.version>
+		<asciidoctor-maven-plugin.version>2.2.5</asciidoctor-maven-plugin.version>
+		<asciidoctorj-diagram.version>2.2.14</asciidoctorj-diagram.version>
+		<spring-asciidoctor-backends.version>0.0.7</spring-asciidoctor-backends.version>
+		<spring-asciidoctor-maven-resources-plugin.version>2.7</spring-asciidoctor-maven-resources-plugin.version>
 
 		<!-- For test plugins -->
 		<maven.test.skip>false</maven.test.skip>
@@ -58,6 +62,16 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.restdocs</groupId>
+			<artifactId>spring-restdocs-mockmvc</artifactId>
+			<version>${spring-restdocs.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -81,36 +95,35 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${maven-checkstyle-plugin.version}</version>
-				<dependencies>
-					<dependency>
-						<groupId>com.puppycrawl.tools</groupId>
-						<artifactId>checkstyle</artifactId>
-						<version>${checkstyle.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>io.spring.javaformat</groupId>
-						<artifactId>spring-javaformat-checkstyle</artifactId>
-						<version>${spring-javaformat.version}</version>
-					</dependency>
-				</dependencies>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>${asciidoctor-maven-plugin.version}</version>
 				<executions>
 					<execution>
-						<id>checkstyle-validation</id>
-						<phase>validate</phase>
-						<inherited>true</inherited>
-						<configuration>
-							<configLocation>io/spring/javaformat/checkstyle/checkstyle.xml</configLocation>
-							<suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
-							<includeTestSourceDirectory>true</includeTestSourceDirectory>
-						</configuration>
+						<id>generate-docs</id>
+						<phase>prepare-package</phase>
 						<goals>
-							<goal>check</goal>
+							<goal>process-asciidoc</goal>
 						</goals>
+						<configuration>
+							<backend>html</backend>
+							<doctype>book</doctype>
+						</configuration>
 					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework.restdocs</groupId>
+						<artifactId>spring-restdocs-asciidoctor</artifactId>
+						<version>${spring-restdocs.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

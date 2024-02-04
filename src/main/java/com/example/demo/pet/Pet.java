@@ -1,43 +1,42 @@
 package com.example.demo.pet;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+
+/**
+ * Restdocs を生成するまでについて学習
+ */
 
 @Entity
 @Table
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor(force = true, access = AccessLevel.PROTECTED)
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIgnoreProperties({ "hibernateLazyInitializer" }) // https://qiita.com/niwasawa/items/9735d5dc4a4a71e84ccd
 public class Pet implements Serializable {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String name;
 
-	private LocalDate dob;
+	private PetType type;
 
-	private Integer age;
-
-	public Pet(Long id, String name, LocalDate dob, Integer age) {
-		this.id = id;
+	public Pet(String name, PetType type) {
 		this.name = name;
-		this.dob = dob;
-		this.age = age;
+		this.type = type;
 	}
 
-	public Pet(String name, LocalDate dob, Integer age) {
-		this.name = name;
-		this.dob = dob;
-		this.age = age;
+	public enum PetType {
+
+		AFFECTIONATE, ASSERTIVE, EASYGOING, GENTLE
+
 	}
 
 }

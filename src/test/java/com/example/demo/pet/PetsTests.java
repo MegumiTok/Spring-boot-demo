@@ -22,8 +22,8 @@ class PetsTests {
 
 	@Test
 	void save() {
-		var pet1 = new Pet(1L, "showdy", LocalDate.of(2000, Month.APRIL, 25), 20);
-		var pet2 = new Pet(1L, "star", LocalDate.of(2018, Month.JANUARY, 18), 5);
+		var pet1 = new Pet("showdy", Pet.PetType.AFFECTIONATE);
+		var pet2 = new Pet("star", Pet.PetType.GENTLE);
 		List<Pet> savedPets = this.pets.saveAllAndFlush(List.of(pet1, pet2));
 		assertThat(savedPets).hasSize(2);
 	}
