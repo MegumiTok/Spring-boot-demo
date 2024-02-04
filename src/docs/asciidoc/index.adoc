@@ -10,3 +10,7 @@ operation::get-pets[snippets='curl-request,http-response']
 
 === Get a pet
 operation::get-pet[snippets='curl-request,http-response']
+
+=== Create a pet
+
+operation::create-pet[snippets='request-fields,curl-request,http-response']
