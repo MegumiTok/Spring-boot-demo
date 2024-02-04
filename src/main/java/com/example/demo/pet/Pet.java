@@ -1,14 +1,8 @@
 package com.example.demo.pet;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -22,19 +16,19 @@ import java.io.Serializable;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties({ "hibernateLazyInitializer" }) // https://qiita.com/niwasawa/items/9735d5dc4a4a71e84ccd
 public class Pet implements Serializable {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String name;
 
 	private PetType type;
 
-	public Pet(Long id, String name, PetType type) {
-		this.id = id;
+	public Pet(String name, PetType type) {
 		this.name = name;
 		this.type = type;
 	}

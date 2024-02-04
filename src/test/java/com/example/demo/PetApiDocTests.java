@@ -37,8 +37,8 @@ public class PetApiDocTests {
 
 	@Test
 	public void getPets() throws Exception {
-		this.pets.save(new Pet(1L, "showdy", Pet.PetType.AFFECTIONATE));
-		this.pets.save(new Pet(2L, "star", Pet.PetType.GENTLE));
+		this.pets.save(new Pet("showdy", Pet.PetType.AFFECTIONATE));
+		this.pets.save(new Pet("star", Pet.PetType.GENTLE));
 
 		this.mvc.perform(get("/pets")) //
 			.andExpect(status().isOk()) //
@@ -47,14 +47,14 @@ public class PetApiDocTests {
 
 	@Test
 	public void getPet() throws Exception {
-		var pet = this.pets.save(new Pet(1L, "showdy", Pet.PetType.AFFECTIONATE));
+		var pet = this.pets.save(new Pet("showdy", Pet.PetType.AFFECTIONATE));
 		this.mvc.perform(get("/pets/{id}", pet.getId())) //
 			.andExpect(status().isOk()) //
 			.andDo(document("get-pet"));
 	}
 
 	@Test
-	public void updatePet() throws Exception {
+	public void createPet() throws Exception {
 		Map<String, Object> createPet = new LinkedHashMap<>();
 		createPet.put("id", 1L);
 		createPet.put("name", "showdy");

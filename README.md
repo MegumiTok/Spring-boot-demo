@@ -40,6 +40,7 @@ docker-compose exec postgres psql -h localhost -U postgres
 - [06 JUnit5 で書くテストコード](./blog/06_test_JUnit5.md)
 - [07 Lombok のトレードオフ](./blog/07_Lombok.md)
 - [08 Jackson](./blog/08_Jackson.md)
+- [09 リフレクションとプロキシについて](./blog/09_リフレクションとプロキシについて.md)
 
 ## メモ
 
