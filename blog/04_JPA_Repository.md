@@ -43,3 +43,6 @@ public class PetService {
 
 [わかりやすい記事](https://terasolunaorg.github.io/guideline/1.0.3.RELEASE/ja/ArchitectureInDetail/DataAccessJpa.html)
 
+## O/Rマッピング（Object/RDB mapping）
+
+- データ形式の相互変換を行う
