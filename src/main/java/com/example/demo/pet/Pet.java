@@ -35,7 +35,10 @@ public class Pet implements Serializable {
 
 	public enum PetType {
 
-		AFFECTIONATE, ASSERTIVE, EASYGOING, GENTLE
+		AFFECTIONATE, //
+		ASSERTIVE, //
+		EASYGOING, //
+		GENTLE //
 
 	}
 
