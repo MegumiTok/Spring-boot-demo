@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class Pra1 {
 
-    private String color;
+	private String color;
 
-    private String type;
+	private String type;
 
 }

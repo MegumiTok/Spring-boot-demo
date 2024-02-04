@@ -8,3 +8,5 @@
 === Get all pets
 operation::get-pets[snippets='curl-request,http-response']
 
+=== Get a pet
+operation::get-pet[snippets='curl-request,http-response']

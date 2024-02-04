@@ -29,3 +29,29 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 ```
 
 MockMvc の自動構成を有効にして構成するためにテストクラスに適用できるアノテーション。
+
+```java
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+@AutoConfigureMockMvc //<-- for MockMvc
+@AutoConfigureRestDocs
+public class PetApiDocTests {
+
+    @Autowired
+    MockMvc mvc; //<-- for MockMvc
+
+    @Autowired
+    Pets pets;
+
+    @Test
+    public void getPets() throws Exception {
+        this.pets.save(new Pet(1L, "showdy", LocalDate.of(2000, Month.APRIL, 25), 20));
+        this.pets.save(new Pet(2L, "star", LocalDate.of(2018, Month.JANUARY, 18), 5));
+
+        this.mvc.perform(get("/pets")).andExpect(status().isOk()).andDo(document("get-pets"));
+    }
+
+}
+```

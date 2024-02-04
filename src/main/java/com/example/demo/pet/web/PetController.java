@@ -24,7 +24,7 @@ public class PetController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getPetById(@PathVariable Long id) {
-		var pet = this.pets.getReferenceById(id); //<-- @Deprecated T getById(ID id);
+		var pet = this.pets.getReferenceById(id); // <-- @Deprecated T getById(ID id);
 		return ResponseEntity.ok(pet);
 	}
 
@@ -47,8 +47,10 @@ public class PetController {
 			updatedPet.setId(id);
 			this.pets.save(updatedPet);
 			return ResponseEntity.noContent().build();
-		} catch (IllegalArgumentException ex) {
+		}
+		catch (IllegalArgumentException ex) {
 			return ResponseEntity.badRequest().body(ex.getMessage());
 		}
 	}
+
 }

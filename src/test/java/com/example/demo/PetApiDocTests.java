@@ -17,22 +17,32 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc // <-- for MockMvc
 @AutoConfigureRestDocs
 public class PetApiDocTests {
 
 	@Autowired
-	private MockMvc mvc;
+	MockMvc mvc; // <-- for MockMvc
 
 	@Autowired
-	private Pets pets;
+	Pets pets;
 
 	@Test
 	public void getPets() throws Exception {
-		this.pets.save(new Pet(1L, "showdy", LocalDate.of(2000, Month.APRIL, 25), 20));
-		this.pets.save(new Pet(2L, "star", LocalDate.of(2018, Month.JANUARY, 18), 5));
+		this.pets.save(new Pet(1L, "showdy", Pet.PetType.AFFECTIONATE));
+		this.pets.save(new Pet(2L, "star", Pet.PetType.GENTLE));
 
-		this.mvc.perform(get("/pets")).andExpect(status().isOk()).andDo(document("get-pets"));
+		this.mvc.perform(get("/pets")) //
+			.andExpect(status().isOk()) //
+			.andDo(document("get-pets"));
+	}
+
+	@Test
+	public void getPet() throws Exception {
+		var pet = this.pets.save(new Pet(1L, "showdy", Pet.PetType.AFFECTIONATE));
+		this.mvc.perform(get("/pets/{id}", pet.getId())) //
+			.andExpect(status().isOk()) //
+			.andDo(document("get-pet"));
 	}
 
 }
