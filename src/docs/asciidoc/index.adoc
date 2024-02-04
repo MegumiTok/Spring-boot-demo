@@ -14,3 +14,11 @@ operation::get-pet[snippets='curl-request,http-response']
 === Create a pet
 
 operation::create-pet[snippets='request-fields,curl-request,http-response']
+
+=== Update a pet
+
+operation::update-pet[snippets='request-fields,curl-request,http-response']
+
+=== Delete a pet
+
+operation::delete-pet[snippets='curl-request,http-response']

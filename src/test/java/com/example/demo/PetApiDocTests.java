@@ -17,6 +17,8 @@ import java.util.Map;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -56,7 +58,6 @@ public class PetApiDocTests {
 	@Test
 	public void createPet() throws Exception {
 		Map<String, Object> createPet = new LinkedHashMap<>();
-		createPet.put("id", 1L);
 		createPet.put("name", "showdy");
 		createPet.put("type", Pet.PetType.ASSERTIVE);
 
@@ -65,10 +66,35 @@ public class PetApiDocTests {
 				.content(this.objectMapper.writeValueAsString(createPet)))
 			.andExpect(status().isCreated())
 			.andDo(document("create-pet", requestFields(//
-					fieldWithPath("id").description("The id of the Pet"), //
 					fieldWithPath("name").description("The name of the Pet"), //
 					fieldWithPath("type").description("The type of the Pet") //
 			)));
+	}
+
+	@Test
+	public void updatePet() throws Exception {
+		var pet = this.pets.save(new Pet("showdy", Pet.PetType.AFFECTIONATE));
+		Map<String, Object> updatePet = new LinkedHashMap<>();
+		updatePet.put("name", "showdy");
+		updatePet.put("type", Pet.PetType.ASSERTIVE);
+
+		this.mvc
+			.perform(delete("/pets/{id}", pet.getId()).contentType(MediaTypes.HAL_JSON)
+				.content(this.objectMapper.writeValueAsString(updatePet)))
+			.andExpect(status().isNoContent())
+			.andDo(document("update-pet", //
+					requestFields(//
+							fieldWithPath("name").description("The name of the Pet"), //
+							fieldWithPath("type").description("The type of the Pet") //
+					)));
+	}
+
+	@Test
+	public void deletePet() throws Exception {
+		var pet = this.pets.save(new Pet("showdy", Pet.PetType.AFFECTIONATE));
+		this.mvc.perform(delete("/pets/{id}", pet.getId()))
+			.andExpect(status().isNoContent())
+			.andDo(document("delete-pet"));
 	}
 
 }
